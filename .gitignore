@@ -1,0 +1,19 @@
+/build
+/build-*
+/build-aux/
+
+*~
+
+/cp3.8
+
+# autotools
+Makefile.in
+/ar-lib
+/aclocal.m4
+/compile
+/autom4te.cache
+/configure
+/install-sh
+/missing
+/depcomp
+/sysconfig.h.in

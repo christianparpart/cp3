@@ -1,0 +1,11 @@
+=encoding UTF-8
+=head1 NAME
+
+cp3 - C++ script interpreter
+
+=head1 SYNOPSIS
+
+cp3 ...
+
+=head1 DESCRIPTION
+
