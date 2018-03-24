@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include <experimental/filesystem>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -23,22 +24,24 @@
 #include <climits>
 #include <libgen.h>
 #include <unistd.h>
-#include <sys/stat.h>
 
 using namespace std;
+using namespace std::experimental::filesystem;
 
-time_t file_mtime(const std::string& f) {
-  struct stat st;
-  if (stat(f.c_str(), &st) < 0)
-    return 0;
-  else
-    return st.st_mtime;
+std::string getCacheDir() {
+  if (const char* homedir = getenv("HOME"); homedir != nullptr)
+    return string(homedir) + "/.cache/cp3";
+
+  return temp_directory_path();
 }
 
 string getCompiled(const string& sourcefile, const vector<string>& args) {
-  const string outputfile = "/tmp/cp3." + to_string(hash<string>{}(sourcefile));
+  const string cachedir = getCacheDir();
+  const string outputfile = cachedir + "/" + to_string(hash<string>{}(sourcefile));
 
-  if (file_mtime(sourcefile) > file_mtime(outputfile)) {
+  create_directories(cachedir);
+
+  if (!exists(outputfile) || last_write_time(sourcefile) > last_write_time(outputfile)) {
     setenv("CXX", "g++", 0);
 
     // XXX: chdir to basedir of sourcefile (so relative includes work)

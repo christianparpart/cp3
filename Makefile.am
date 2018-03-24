@@ -22,6 +22,7 @@ cp3_CXXFLAGS = \
 	-I$(top_srcdir)
 
 cp3_LDADD = \
+	-lstdc++fs \
 	$(AM_LDFLAGS)
 
 # cp3_LDFLAGS += -static -static-libgcc -static-libstdc++

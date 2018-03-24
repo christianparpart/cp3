@@ -1,4 +1,4 @@
-#! /usr/bin/cp3 -std=c++17 -I$HOME/projects/cp3yyy
+#! /usr/bin/cp3 -std=c++17 -I$HOME/projects/cp3
 // example C++ shell script
 // Copyright (C) 2018 Christian Parpart <christian@parpart.family>
 // 
